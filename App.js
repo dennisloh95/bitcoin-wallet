@@ -2,15 +2,18 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Navigation from "./navigation";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function App() {
+  const client = new QueryClient();
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Navigation />
-      {/* https://api.coindesk.com/v1/bpi/historical/close.json
-      https://api.coindesk.com/v1/bpi/currentprice.json */}
-    </View>
+    <QueryClientProvider client={client}>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <Navigation />
+      </View>
+    </QueryClientProvider>
   );
 }
 

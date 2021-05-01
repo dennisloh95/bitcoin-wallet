@@ -3,7 +3,7 @@ const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
   primary: "#e36397",
-  secondary: "#bc8da7",
+  secondary: "#E776A3",
 
   white: "#ffffff",
   black: "#000000",
@@ -36,10 +36,10 @@ export const SIZES = {
 };
 
 export const FONTS = {
-  h1: { fontSize: SIZES.h1, lineHeight: 36, fontWeight: 700 },
-  h2: { fontSize: SIZES.h2, lineHeight: 30, fontWeight: 700 },
-  h3: { fontSize: SIZES.h3, lineHeight: 22, fontWeight: 700 },
-  h4: { fontSize: SIZES.h4, lineHeight: 22, fontWeight: 700 },
+  h1: { fontSize: SIZES.h1, lineHeight: 36, fontWeight: "700" },
+  h2: { fontSize: SIZES.h2, lineHeight: 30, fontWeight: "700" },
+  h3: { fontSize: SIZES.h3, lineHeight: 22, fontWeight: "700" },
+  h4: { fontSize: SIZES.h4, lineHeight: 22, fontWeight: "700" },
   body1: { fontSize: SIZES.body1 },
   body2: { fontSize: SIZES.body2 },
   body3: { fontSize: SIZES.body3 },

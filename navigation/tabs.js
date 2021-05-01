@@ -1,9 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import {
-  createBottomTabNavigator,
-  BottomTabBar,
-} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -32,7 +29,8 @@ const TabBarIcon = ({ title, name, focused }) => {
   );
 };
 
-const TabBarCustomButton = ({ children, onPress }) => {
+const TabBarCustomButton = ({ children, onPress, ...props }) => {
+  console.log(props);
   return (
     <TouchableOpacity
       style={{
@@ -41,10 +39,11 @@ const TabBarCustomButton = ({ children, onPress }) => {
         alignItems: "center",
         ...styles.shadow,
       }}
-      onPress={onPress}
+      onPress={() => {}}
     >
       <LinearGradient
         colors={[COLORS.primary, COLORS.secondary]}
+        locations={[0.5, 0.8]}
         style={{
           width: 70,
           height: 70,
@@ -85,7 +84,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Transaction"
-        component={Home}
+        component={() => null}
         options={{
           tabBarIcon: () => (
             <AntDesign name={"swap"} size={30} color={COLORS.white} />
