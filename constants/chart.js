@@ -17,6 +17,7 @@ const lineChart = (data) => `
     });
     chart.tooltip({
     custom: true,
+    alwaysShow: true,
     showXTip: true,
     showYTip: true,
     snap: true,

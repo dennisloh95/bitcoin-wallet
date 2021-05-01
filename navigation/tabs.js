@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
-
 import { Home } from "../screens";
 import { COLORS, FONTS } from "../constants";
+import BottomSheet from "reanimated-bottom-sheet";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,8 +29,7 @@ const TabBarIcon = ({ title, name, focused }) => {
   );
 };
 
-const TabBarCustomButton = ({ children, onPress, ...props }) => {
-  console.log(props);
+const TabBarCustomButton = ({ children, onPress }) => {
   return (
     <TouchableOpacity
       style={{

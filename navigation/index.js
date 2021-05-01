@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const index = () => {
+const index = (props) => {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -15,7 +15,7 @@ const index = () => {
         }}
         initialRouteName={"Home"}
       >
-        <Stack.Screen name="Home" component={Tabs} />
+        <Stack.Screen name="Home" component={() => Tabs(props)} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -33,14 +33,14 @@ const Home = () => {
 
   if (currentPrice.isLoading || closePrice.isLoading)
     return (
-      <View>
+      <View style={styles.container}>
         <Text>loading...</Text>
       </View>
     );
   if (currentPrice.error || closePrice.error)
     return (
-      <View>
-        <Text>Something went wrong...</Text>
+      <View style={styles.container}>
+        <Text>Something went wrong.</Text>
       </View>
     );
 
@@ -143,10 +143,31 @@ const Home = () => {
     );
   };
 
-  let data = Object.entries(closePrice.data.bpi).map((data) => {
+  let lineChartData = Object.entries(closePrice.data.bpi).map((data) => {
     return {
       date: data[0],
       value: data[1],
+    };
+  });
+
+  let candleChartData = Object.entries(closePrice.data.bpi).map((data) => {
+    const randomPrice =
+      data[1] * parseFloat((Math.random() * (1.2 - 0.8) + 0.8).toFixed(2));
+    const randomVolumn = Math.random() * (1000000000 - 100000000) + 100000000;
+
+    return {
+      date: data[0],
+      value: data[1],
+      reportDate: data[0],
+      start: randomPrice,
+      end: data[1],
+      high: randomPrice,
+      low: randomPrice,
+      volumn: randomVolumn,
+      MA5: randomPrice,
+      MA10: randomPrice,
+      MA20: randomPrice,
+      MA30: randomPrice,
     };
   });
 
@@ -164,7 +185,7 @@ const Home = () => {
           ...styles.shadow,
         }}
       >
-        <Chart initScript={lineChart(data)} />
+        <Chart initScript={lineChart(lineChartData)} />
       </View>
     );
   };
