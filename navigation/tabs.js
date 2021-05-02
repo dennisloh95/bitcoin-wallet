@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
 import { Home, Account } from "../screens";
 import { COLORS, FONTS } from "../constants";
-import BottomSheet from "reanimated-bottom-sheet";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,6 +30,7 @@ const TabBarIcon = ({ title, name, focused }) => {
 };
 
 const TabBarCustomButton = ({ children, onPress }) => {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={{
@@ -38,7 +39,9 @@ const TabBarCustomButton = ({ children, onPress }) => {
         alignItems: "center",
         ...styles.shadow,
       }}
-      onPress={() => {}}
+      onPress={() => {
+        navigation.navigate("TransactionBottomSheet");
+      }}
     >
       <LinearGradient
         colors={[COLORS.primary, COLORS.secondary]}
@@ -53,10 +56,6 @@ const TabBarCustomButton = ({ children, onPress }) => {
       </LinearGradient>
     </TouchableOpacity>
   );
-};
-
-const NullComponent = () => {
-  return null;
 };
 
 const Tabs = () => {
@@ -85,7 +84,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Transaction"
-        component={NullComponent}
+        component={() => {}}
         options={{
           tabBarIcon: () => (
             <AntDesign name={"swap"} size={30} color={COLORS.white} />

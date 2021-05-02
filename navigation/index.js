@@ -1,7 +1,11 @@
 import React from "react";
 import Tabs from "./tabs";
+import { Transaction } from "../screens";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
 import { COLORS } from "../constants";
 
 const Stack = createStackNavigator();
@@ -13,16 +17,21 @@ const MyTheme = {
     background: COLORS.white,
   },
 };
-const index = (props) => {
+const index = () => {
   return (
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
+          gestureEnabled: true,
+          cardOverlayEnabled: true,
+          ...TransitionPresets.ModalPresentationIOS,
         }}
+        mode="modal"
         initialRouteName={"Home"}
       >
-        <Stack.Screen name="Home" component={() => Tabs(props)} />
+        <Stack.Screen name="Home" component={Tabs} />
+        <Stack.Screen name="TransactionBottomSheet" component={Transaction} />
       </Stack.Navigator>
     </NavigationContainer>
   );
