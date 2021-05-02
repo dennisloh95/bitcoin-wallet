@@ -8,12 +8,15 @@ import {
   Image,
   ImageBackground,
   Dimensions,
+  Pressable,
+  Linking,
 } from "react-native";
 import { useQuery } from "react-query";
 import { LinearGradient } from "expo-linear-gradient";
 import { SIZES, FONTS, COLORS, dummyData, lineChart } from "../constants";
 import { Zocial } from "@expo/vector-icons";
 import Chart from "../chart/react-native-f2chart";
+import moment from "moment";
 
 const getCurrentPrice = async () => {
   return await (await fetch(dummyData.api.currentPrice)).json();
@@ -87,7 +90,10 @@ const Home = () => {
                 ...FONTS.body5,
               }}
             >
-              {currentPrice.data.time.updated}
+              {moment
+                .utc(currentPrice.data.time.updated)
+                .local()
+                .format("LLLL")}
             </Text>
           </View>
         </LinearGradient>
@@ -186,6 +192,17 @@ const Home = () => {
         }}
       >
         <Chart initScript={lineChart(lineChartData)} />
+        <View style={{ alignItems: "flex-end", marginTop: SIZES.base }}>
+          <Pressable
+            onPress={() =>
+              Linking.openURL("https://www.coindesk.com/price/bitcoin")
+            }
+          >
+            <Text style={{ ...FONTS.body5, color: COLORS.grey }}>
+              Power by CoinDesk
+            </Text>
+          </Pressable>
+        </View>
       </View>
     );
   };

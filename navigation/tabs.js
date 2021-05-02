@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
-import { Home } from "../screens";
+import { Home, Account } from "../screens";
 import { COLORS, FONTS } from "../constants";
 import BottomSheet from "reanimated-bottom-sheet";
 
@@ -55,6 +55,10 @@ const TabBarCustomButton = ({ children, onPress }) => {
   );
 };
 
+const NullComponent = () => {
+  return null;
+};
+
 const Tabs = () => {
   return (
     <Tab.Navigator
@@ -66,8 +70,6 @@ const Tabs = () => {
           left: 0,
           right: 0,
           elevation: 0,
-          backgroundColor: COLORS.white,
-          borderTopColor: "transparent",
           height: 100,
         },
       }}
@@ -83,7 +85,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Transaction"
-        component={() => null}
+        component={NullComponent}
         options={{
           tabBarIcon: () => (
             <AntDesign name={"swap"} size={30} color={COLORS.white} />
@@ -92,11 +94,11 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Accounts"
-        component={Home}
+        name="Account"
+        component={Account}
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon title={"Accounts"} name={"wallet"} focused={focused} />
+            <TabBarIcon title={"Account"} name={"wallet"} focused={focused} />
           ),
         }}
       />

@@ -24,12 +24,12 @@ export default function App() {
           <View style={styles.container}>
             <StatusBar style="auto" />
             <Navigation callTransactionScreen={callTransactionScreen} />
-            <BottomSheet
+            {/* <BottomSheet
               ref={bottomSheetRef}
               snapPoints={[450, 300, 0]}
               borderRadius={10}
               renderContent={Transaction}
-            />
+            /> */}
           </View>
         </QueryClientProvider>
       </PersistGate>
