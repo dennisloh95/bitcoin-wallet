@@ -43,6 +43,12 @@ Bitcoin wallet uses a number of dependencies to work:
 - [[React Query](https://react-query.tanstack.com/)] - Fetching data, and also refetching data every 1 minute
 - [[f2 Chart](https://f2.antv.vision/en)] - Data visualization in line chart
 
+## Demo
+
+Requires Expo Go [android](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_SG&gl=US) / [ios](https://apps.apple.com/us/app/expo-go/id982107779) to run.
+
+[Demo link](https://expo.io/@dennisloh95/projects/bitcoin-wallet)
+
 ## Installation
 
 Requires [Node.js](https://nodejs.org/) to run.
