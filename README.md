@@ -18,16 +18,16 @@ This project is build by using expo cli. It make use of [CoinDesk API](https://w
 
 <div style="display:flex;">
     <figure>
-        <img src="./readme/view-chart.gif" alt="view chart" width="150"/>
-        <figcaption style="font-size:12px;margin:10px;text-align:center;">Display current price</figcaption>
+        <img src="./readme/view-chart.gif" alt="view chart" width="150" />
+        <figcaption style="font-size:12px;margin:10px;text-align:center;display:block;">Display current price</figcaption>
     </figure>
     <figure>
         <img src="./readme/add-transaction.gif" alt="add transaction" width="150"/>
-        <figcaption style="font-size:12px;margin:10px;text-align:center;">Add transaction</figcaption>
+        <figcaption style="font-size:12px;margin:10px;text-align:center;display:block;">Add transaction</figcaption>
     </figure>
     <figure>
         <img src="./readme/update-transaction.gif" alt="update transaction" width="150"/>
-        <figcaption style="font-size:12px;margin:10px;text-align:center;">Remove or edit transaction</figcaption>
+        <figcaption style="font-size:12px;margin:10px;text-align:center;display:block;">Remove or edit transaction</figcaption>
     </figure>
 </div>
 
