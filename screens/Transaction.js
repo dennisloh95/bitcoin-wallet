@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { AntDesign, Zocial } from "@expo/vector-icons";
 import { COLORS, SIZES, FONTS } from "../constants";
@@ -13,6 +14,10 @@ import SegmentedControl from "@react-native-segmented-control/segmented-control"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { addAmount } from "../redux/wallet/wallet.action";
+
+function Amount(date, amount, sell = false) {
+  (this.date = date), (this.amount = amount), (this.sell = sell);
+}
 
 const Transaction = ({ navigation }) => {
   const [selectedSegment, setSelectedSegment] = useState(0);
@@ -32,7 +37,27 @@ const Transaction = ({ navigation }) => {
   };
 
   const handleAddAmount = () => {
-    console.log(wallet);
+    Alert.alert(
+      "Transaction",
+      value ? "Transaction Added" : "Please insert value.",
+      [
+        {
+          text: "OK",
+          onPress: () => {
+            if (value) {
+              let amount = new Amount(
+                moment(date).valueOf(),
+                value,
+                selectedSegment === 0 ? false : true
+              );
+              let tempWallet = [...wallet, amount];
+              dispatch(addAmount(tempWallet));
+              navigation.goBack();
+            }
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -43,7 +68,8 @@ const Transaction = ({ navigation }) => {
     >
       <View
         style={{
-          padding: SIZES.padding / 2,
+          paddingHorizontal: SIZES.padding / 2,
+          paddingVertical: SIZES.padding,
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
@@ -53,13 +79,13 @@ const Transaction = ({ navigation }) => {
           style={{ padding: SIZES.base }}
           onPress={() => navigation.goBack()}
         >
-          <AntDesign name="close" size={24} color="black" />
+          <AntDesign name="close" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
           style={{ padding: SIZES.base }}
           onPress={() => handleAddAmount()}
         >
-          <AntDesign name="check" size={24} color="black" />
+          <AntDesign name="check" size={30} color="black" />
         </TouchableOpacity>
       </View>
       <View style={{ paddingHorizontal: SIZES.padding }}>
@@ -99,7 +125,7 @@ const Transaction = ({ navigation }) => {
                 marginTop: SIZES.radius,
                 padding: SIZES.base,
                 textAlign: "right",
-                color: COLORS.grey,
+                color: selectedSegment === 0 ? COLORS.green : COLORS.red,
               }}
               onChangeText={handleUpdateValue}
               value={value}
