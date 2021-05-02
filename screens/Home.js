@@ -114,10 +114,7 @@ const Home = () => {
                 ...FONTS.body5,
               }}
             >
-              {moment
-                .utc(currentPrice.data.time.updated)
-                .local()
-                .format("LLLL")}
+              {moment(currentPrice.data.time.updated).local().format("LLLL")}
             </Text>
           </View>
         </LinearGradient>
