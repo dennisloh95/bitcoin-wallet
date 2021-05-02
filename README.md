@@ -17,18 +17,18 @@ This project is build by using expo cli. It make use of [CoinDesk API](https://w
 - Store transaction history in local storage
 
 <div style="display:flex;">
-    <figure>
+    <div style="display:flex;flex-direction:column;">
         <img src="./readme/view-chart.gif" alt="view chart" width="150" />
-        <figcaption style="font-size:12px;margin:10px;text-align:center;display:block;">Display current price</figcaption>
-    </figure>
-    <figure>
+        <span style="font-size:12px;margin:10px;text-align:center;display:block;">Display current price</span>
+    </div>
+    <div style="display:flex;flex-direction:column;">
         <img src="./readme/add-transaction.gif" alt="add transaction" width="150"/>
-        <figcaption style="font-size:12px;margin:10px;text-align:center;display:block;">Add transaction</figcaption>
-    </figure>
-    <figure>
+        <span style="font-size:12px;margin:10px;text-align:center;display:block;">Add transaction</span>
+    </div>
+    <div style="display:flex;flex-direction:column;">
         <img src="./readme/update-transaction.gif" alt="update transaction" width="150"/>
-        <figcaption style="font-size:12px;margin:10px;text-align:center;display:block;">Remove or edit transaction</figcaption>
-    </figure>
+        <span style="font-size:12px;margin:10px;text-align:center;display:block;">Remove or edit transaction</span>
+    </div>
 </div>
 
 ## Tech
