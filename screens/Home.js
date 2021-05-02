@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import { SIZES, FONTS, COLORS, dummyData, lineChart } from "../constants";
 import { Zocial } from "@expo/vector-icons";
 import Chart from "../chart/react-native-f2chart";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 const getCurrentPrice = async () => {
   return await (await fetch(dummyData.api.currentPrice)).json();
@@ -27,6 +28,8 @@ const getClosePrice = async () => {
 };
 
 const Home = () => {
+  const wallet = useSelector((state) => state.wallet.wallet);
+
   const currentPrice = useQuery("currentPrice", getCurrentPrice, {
     refetchInterval: 60000,
   });
@@ -46,6 +49,11 @@ const Home = () => {
         <Text>Something went wrong.</Text>
       </View>
     );
+
+  useEffect(() => {
+    let t = wallet.filter((item) => item.sell === false);
+    console.log(t);
+  }, []);
 
   const renderHeader = () => {
     return (

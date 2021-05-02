@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,12 +14,16 @@ import { updateAmount } from "../redux/wallet/wallet.action";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import uuid from "react-native-uuid";
 
-function Amount(date, amount, sell = false) {
-  (this.date = date), (this.amount = amount), (this.sell = sell);
+function Amount(id, date, amount, sell = false) {
+  (this.id = id),
+    (this.date = date),
+    (this.amount = amount),
+    (this.sell = sell);
 }
 
-const Transaction = ({ navigation }) => {
+const Transaction = ({ navigation, route: { params } }) => {
   const [selectedSegment, setSelectedSegment] = useState(0);
   const wallet = useSelector((state) => state.wallet.wallet);
   const dispatch = useDispatch();
@@ -27,32 +31,60 @@ const Transaction = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
+  useEffect(() => {
+    if (params?.id) {
+      let edit = wallet.filter((item) => item.id === params?.id)[0];
+      setSelectedSegment(edit.sell ? 1 : 0);
+      setValue(edit.amount);
+      setDate(edit.date);
+    }
+  }, []);
+
   const handleUpdateValue = (val) => {
     let index = val.indexOf(".");
 
     if (index > -1) {
       val = val.substr(0, index + 1) + val.slice(index).replace(/\./g, "");
     }
+
     setValue(val);
   };
 
   const handleAddAmount = () => {
     Alert.alert(
       "Transaction",
-      value ? "Transaction Added" : "Please insert value.",
+      value && Number(value) > 0 ? "Transaction Added" : "Please insert value.",
       [
         {
           text: "OK",
           onPress: () => {
-            if (value) {
-              let amount = new Amount(
-                moment(date).valueOf(),
-                value,
-                selectedSegment === 0 ? false : true
-              );
-              let tempWallet = [...wallet, amount];
-              dispatch(updateAmount(tempWallet));
-              navigation.goBack();
+            if (params?.id) {
+              if (value && Number(value) > 0) {
+                let amount = new Amount(
+                  params?.id,
+                  moment(date).valueOf(),
+                  value,
+                  selectedSegment === 0 ? false : true
+                );
+                let tempWallet = [
+                  ...wallet.filter((item) => item.id !== params?.id),
+                  amount,
+                ];
+                dispatch(updateAmount(tempWallet));
+                navigation.goBack();
+              }
+            } else {
+              if (value && Number(value) > 0) {
+                let amount = new Amount(
+                  uuid.v4(),
+                  moment(date).valueOf(),
+                  value,
+                  selectedSegment === 0 ? false : true
+                );
+                let tempWallet = [...wallet, amount];
+                dispatch(updateAmount(tempWallet));
+                navigation.goBack();
+              }
             }
           },
         },
