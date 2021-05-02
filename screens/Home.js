@@ -205,7 +205,7 @@ const Home = () => {
     return (
       <View
         style={{
-          marginTop: SIZES.padding * 2.5,
+          marginTop: SIZES.padding * 2,
           height: "100%",
           paddingVertical: SIZES.padding,
           paddingHorizontal: SIZES.padding,
@@ -215,6 +215,11 @@ const Home = () => {
           ...styles.shadow,
         }}
       >
+        <View>
+          <Text style={{ ...FONTS.h4, color: COLORS.grey }}>
+            Last 30 days trend
+          </Text>
+        </View>
         <Chart initScript={lineChart(lineChartData)} />
         <View style={{ alignItems: "flex-end", marginTop: SIZES.base }}>
           <Pressable
