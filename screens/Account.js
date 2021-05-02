@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateAmount } from "../redux/wallet/wallet.action";
 import { AntDesign } from "@expo/vector-icons";
 import { SwipeListView } from "react-native-swipe-list-view";
+import { color } from "react-native-reanimated";
 
 const Account = ({ navigation }) => {
   const wallet = useSelector((state) => state.wallet.wallet);
@@ -114,15 +115,33 @@ const Account = ({ navigation }) => {
               renderItem={({ item }) => (
                 <View
                   style={{
-                    backgroundColor: COLORS.secondary,
+                    backgroundColor: COLORS.white,
+                    borderColor: COLORS.lightGrey,
+                    borderWidth: 1,
+                    borderRadius: 10,
                     padding: SIZES.radius,
                     marginBottom: SIZES.base,
                     alignItems: "center",
                     height: 80,
+                    color: COLORS.white,
+                    flexDirection: "row",
+                    ...styles.shadow,
                   }}
                 >
-                  <Text>{item.amount}</Text>
-                  <Text>{moment(item.date).format("YYYY MMM DD")}</Text>
+                  <AntDesign
+                    name={item.sell ? "minus" : "plus"}
+                    size={20}
+                    color={item.sell ? COLORS.red : COLORS.green}
+                    style={{ padding: SIZES.radius }}
+                  />
+                  <Text
+                    style={{
+                      color: item.sell ? COLORS.red : COLORS.green,
+                      ...FONTS.h3,
+                    }}
+                  >
+                    {item.amount} btc
+                  </Text>
                 </View>
               )}
               renderHiddenItem={({ item }, rowMap) => (

@@ -50,10 +50,22 @@ const Home = () => {
       </View>
     );
 
-  useEffect(() => {
-    let t = wallet.filter((item) => item.sell === false);
-    console.log(t);
-  }, []);
+  const calculateAccountBalance = (wallet, currentRate) => {
+    let buy = wallet
+      .filter((item) => item.sell === false)
+      .reduce((sum, val) => {
+        return sum + Number(val.amount);
+      }, 0);
+    let sell = wallet
+      .filter((item) => item.sell === true)
+      .reduce((sum, val) => {
+        return sum + Number(val.amount);
+      }, 0);
+    let available = buy - sell;
+    available = currentRate * available;
+
+    return available.toFixed(4);
+  };
 
   const renderHeader = () => {
     return (
@@ -90,7 +102,11 @@ const Home = () => {
                 ...FONTS.h1,
               }}
             >
-              ${currentPrice.data.bpi.USD.rate}
+              $
+              {calculateAccountBalance(
+                wallet,
+                currentPrice.data.bpi.USD.rate_float
+              )}
             </Text>
             <Text
               style={{
@@ -206,7 +222,13 @@ const Home = () => {
               Linking.openURL("https://www.coindesk.com/price/bitcoin")
             }
           >
-            <Text style={{ ...FONTS.body5, color: COLORS.grey }}>
+            <Text
+              style={{
+                ...FONTS.body5,
+                color: COLORS.grey,
+                textDecorationLine: "underline",
+              }}
+            >
               Power by CoinDesk
             </Text>
           </Pressable>
