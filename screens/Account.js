@@ -91,7 +91,12 @@ const Account = ({ navigation }) => {
       >
         <View style={{ paddingBottom: 100 }}>
           <Text
-            style={{ ...FONTS.h4, color: COLORS.primary, fontWeight: "600" }}
+            style={{
+              ...FONTS.h4,
+              color: COLORS.primary,
+              fontWeight: "600",
+              marginBottom: SIZES.base,
+            }}
           >
             {moment().format("YYYY-MM-DD") === selectedDate
               ? "Today"
@@ -115,7 +120,7 @@ const Account = ({ navigation }) => {
               renderItem={({ item }) => (
                 <View
                   style={{
-                    backgroundColor: COLORS.white,
+                    backgroundColor: item.sell ? COLORS.red : COLORS.green,
                     borderColor: COLORS.lightGrey,
                     borderWidth: 1,
                     borderRadius: 10,
@@ -131,12 +136,12 @@ const Account = ({ navigation }) => {
                   <AntDesign
                     name={item.sell ? "minus" : "plus"}
                     size={20}
-                    color={item.sell ? COLORS.red : COLORS.green}
+                    color={COLORS.white}
                     style={{ padding: SIZES.radius }}
                   />
                   <Text
                     style={{
-                      color: item.sell ? COLORS.red : COLORS.green,
+                      color: COLORS.white,
                       ...FONTS.h3,
                     }}
                   >
