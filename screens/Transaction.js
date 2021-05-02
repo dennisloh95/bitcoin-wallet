@@ -10,10 +10,10 @@ import {
 import { AntDesign, Zocial } from "@expo/vector-icons";
 import { COLORS, SIZES, FONTS } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
+import { updateAmount } from "../redux/wallet/wallet.action";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
-import { addAmount } from "../redux/wallet/wallet.action";
 
 function Amount(date, amount, sell = false) {
   (this.date = date), (this.amount = amount), (this.sell = sell);
@@ -22,10 +22,10 @@ function Amount(date, amount, sell = false) {
 const Transaction = ({ navigation }) => {
   const [selectedSegment, setSelectedSegment] = useState(0);
   const wallet = useSelector((state) => state.wallet.wallet);
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
 
   const handleUpdateValue = (val) => {
     let index = val.indexOf(".");
@@ -51,7 +51,7 @@ const Transaction = ({ navigation }) => {
                 selectedSegment === 0 ? false : true
               );
               let tempWallet = [...wallet, amount];
-              dispatch(addAmount(tempWallet));
+              dispatch(updateAmount(tempWallet));
               navigation.goBack();
             }
           },

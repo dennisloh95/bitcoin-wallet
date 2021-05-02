@@ -4,8 +4,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { COLORS, SIZES, FONTS } from "../constants";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAmount } from "../redux/wallet/wallet.action";
 
 const Account = () => {
+  const wallet = useSelector((state) => state.wallet.wallet);
+  const dispatch = useDispatch();
+
   const [selectedDate, setSelectedDate] = useState(
     moment(selectedDate).format("YYYY-MM-DD")
   );
