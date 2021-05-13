@@ -2,7 +2,7 @@
 
 <img src="./assets/icon.png" alt="icon" width="80"/>
 
-## Seedly React Native Assignment
+## React Native Project
 
 This project is build by using expo cli. It make use of [CoinDesk API](https://www.coindesk.com/coindesk-api) for current price and last 30 days trend. Theme color palette is generate by [Coolors](https://coolors.co/). Spash screen and App Icon is design from [Figma](https://www.figma.com/file/lkyWcrWkryEvFZ8fjMPouW/Bitcoin-Wallet?node-id=0%3A1). Icon is from [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_wallet).
 
